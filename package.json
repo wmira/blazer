@@ -1,0 +1,22 @@
+{
+  "name": "blazer",
+  "version": "0.0.1",
+  "description": "Node API for BackBlaze B2",
+  "main": "index.js",
+  "scripts": {
+    "test-watch": "mocha --harmony --harmony_modules --harmony_rest_parameters --harmony_destructuring --recursive  -w",
+    "test": "mocha --harmony --harmony_modules --harmony_rest_parameters --harmony_destructuring --recursive "
+  },
+  "keywords": [
+    "backblaze",
+    "b2 backblaze",
+    "b2",
+    "storage"
+  ],
+  "author": "Warren Mira",
+  "license": "MIT",
+  "devDependencies": {    
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
