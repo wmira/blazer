@@ -2,8 +2,10 @@
   "name": "blazer",
   "version": "0.0.1",
   "description": "Node API for BackBlaze B2",
-  "main": "index.js",
+  "main": "lib/b2.js",
   "scripts": {
+    "watch": "node_modules/.bin/watch 'npm run dist' src/ ",
+    "dist": "babel -d lib/ src/",
     "test-watch": "mocha --harmony --harmony_modules --harmony_rest_parameters --harmony_destructuring --recursive  -w",
     "test": "mocha --harmony --harmony_modules --harmony_rest_parameters --harmony_destructuring --recursive "
   },
@@ -15,8 +17,13 @@
   ],
   "author": "Warren Mira",
   "license": "MIT",
-  "devDependencies": {    
+  "devDependencies": {
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.3",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-stage-2": "^6.3.13",
+    "babel-watch": "^1.0.1",
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "watch": "^0.17.1"
   }
 }

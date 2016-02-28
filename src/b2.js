@@ -2,7 +2,6 @@
 const { create_bucket, list_buckets } = require('./buckets');
 const { get_upload_url, upload_file } = require('./upload');
 
-//const get_upload_url = require('./get_upload_url');
 /**
  * Token object here contains
   "accountId", "apiUrl", "authorizationToken", "downloadUrl"
@@ -13,7 +12,6 @@ const createB2 = (token) => {
             !token.authorizationToken || !token.downloadUrl ) {
         throw new Error('Invalid token object as argument.' , token);
     }
-
     const api = {
         create_bucket: create_bucket(token),
         list_buckets: list_buckets(token),

@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 const crypto = require('crypto');
 const path = require('path');
@@ -24,6 +25,9 @@ const get_upload_url = (token) => {
 
 };
 
+/**
+ * Read the given file and return a promise
+ */
 const readFile = ( file ) => {
     var data = [];
     var len = 0;

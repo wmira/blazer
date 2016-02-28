@@ -61,7 +61,7 @@ b2.create_bucket({bucketName, bucketType}).then( res => {
 });
 
 ````
-    You can also use this directly, without passing from the b2 instance.
+    You can also use it directly, without passing from the b2 instance.
 
 ```javascript
 
@@ -100,9 +100,10 @@ npm run test
 
 ## If I need to pass the b2 functions, do I need to bind them to b2?
 
-No. Functions on the B2 object are not dependent on this. Besides this is broken in javascript so it is designed such that you can pass the function around without worrying on context.
+No. Functions on the B2 object are not dependent on the this context. You will
+be able to pass the member around without worrying on binding b2
 
 ```javascript
-someHandler( b2.create_bucket.bind(this) ) //<--- you don't need to do this!
+someHandler( b2.create_bucket.bind(b2) ) //<--- you don't need to do this
 someHandler( b2.create_bucket ); //<-- works fine
 ```
