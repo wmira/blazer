@@ -15,4 +15,4 @@ const authorize_account = (accountId, applicationKey) => {
 
 };
 
-module.exports = authorize_account;
+module.exports = { authorize_account };

@@ -1,2 +1,2 @@
---require chai
+--require should
 --reporter nyan

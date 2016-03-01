@@ -1,5 +1,6 @@
 
 const https = require('https');
+
 const { freeze, assign } = Object;
 
 const BASE_PATH = '/b2api/v1';
@@ -44,20 +45,18 @@ const httpCall = (params, tosend)  => {
             });
             res.on('error', reject );
             res.on('end',() => {
-                console.log('end');
                 const objBuffer = buffer ? toJSON(buffer) : undefined;
                 if ( res.statusCode === 200 ) { //anything other than 200 is a failure
                     resolve(objBuffer);
                 } else {
-                    reject({statusCode: res.statusCode, res: objBuffer});
+                    console.log('error', objBuffer);
+                    reject( objBuffer );
                 }
 
             });
         });
         if ( tosend ) {
-            console.log('writing');
             req.write(tosend);
-            console.log('writing done');
         }
         req.on('error', reject);
         //flush it
@@ -65,4 +64,5 @@ const httpCall = (params, tosend)  => {
     });
 };
 
-module.exports = { httpCall, enrichParams, hostnameFromApiUrl, createApiHeader };
+
+module.exports = {  httpCall, enrichParams, hostnameFromApiUrl, createApiHeader };

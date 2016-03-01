@@ -1,6 +1,6 @@
 
-const chai = require('chai');
-const expect = chai.expect;
+
+const should = require('should');
 const { create_bucket } =  require('../lib/buckets') ;
 
 describe('buckets', () => {
@@ -12,7 +12,7 @@ describe('buckets', () => {
             const callCreate = function() {
                 create({});
             };
-            expect(callCreate).to.throw(Error);
+            should(callCreate).throw(Error);
 
         });
     });
