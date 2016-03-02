@@ -6,6 +6,11 @@ in progress and not all api is implemented yet.
 
 Status:
 
+0.0.2
+
+ - added b2session - helper to do automatic retries
+ - added store management to help in persisting/reusing tokens
+
 0.0.1
  - upload_file
  - create_bucket
@@ -85,11 +90,112 @@ create_bucket(token)({bucketName, bucketType}).then( res => {
 
 ### b2.upload
 
+
+# B2 Session
+
+You can use the createB2 call to manually call a b2 api directly but if you blazer
+from some sort of an app then it would be good to have some facility to help you
+do automatic retries and token keys management. The createB2Session calls does that
+exactly.
+
+## createB2Session
+
+To create a b2Session object, call createB2Session passing in your accountId and applicationKey
+
+```javascript
+    const { createB2Session } = require('blazer');
+
+    const b2Session = createB2Session( { accountId, applicationKey} );
+
+    //use the api normally, b2session will automatically create token and
+    //retry if needed
+    b2Session.create_bucket(..)
+```
+
+## configuration
+
+The second argument to createB2Session is a config file with the following attribute
+
+### debug
+
+if set to true, then more verbose log is outputted.
+
+### maxRetry
+
+the maximum number of calls when there is a failure before giving up.
+
+### store
+
+The store instance to use. By default it uses a memory store. You can pass your own
+store object which is required to have the following attributes.
+
+#### token
+
+A function that returns the current token object.
+
+#### persistToken
+
+A function that accepts the newToken object and returns a promise which gets
+resolved once the token has been persisted by the store.
+
+#### invalidate
+
+Invalidate the current active token. You need to set it to undefined such
+that calls to token() will return falsy.
+
+A sample implementation below
+
+```javascript
+const createMemoryStore = () => {
+    var token;
+
+    return {
+        token() {
+            return token;
+        },
+        persistToken(newToken) {
+            token = newToken;
+            return Promise.resolve(newToken);
+        },
+        invalidate() {
+            token = undefined;
+        }
+    };
+};
+
+```
+
+# Status
+
+| Api Call        | Status        |
+| --------------- |:-------------:|
+| create_bucket   | done          |
+| list_buckets    | done          |
+| upload_file     | done          |
+| authorized_account     | done          |
+| get_upload_url     | done          |
+| cancel_large_file     | pending          |
+| delete_bucket     | done          |
+| delete_file_version     | pending          |
+| download_file_by_id     | pending          |
+| download_file_by_name     | pending          |
+| finish_large_file     | pending          |
+| get_file_info     | pending          |
+| get_upload_part_url     | pending          |
+| get_upload_url     | pending          |
+| hide_file     | pending          |
+| list_file_names     | pending          |
+| list_file_versions     | pending          |
+| list_parts     | pending          |
+| list_unfinished_large_files     | pending          |
+| start_large_file     | pending          |
+| update_bucket     | done          |
+| upload_part     | pending          |
+
+
 # Requirements
 
-node 5+ is required and with the following flags:
-
---harmony --harmony_modules --harmony_rest_parameters --harmony_destructuring
+Node 5+ is required at the moment.
 
 # Testing
 
