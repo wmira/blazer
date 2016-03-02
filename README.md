@@ -93,8 +93,8 @@ create_bucket(token)({bucketName, bucketType}).then( res => {
 
 # B2 Session
 
-You can use the createB2 call to manually call a b2 api directly but if you blazer
-from some sort of an app then it would be good to have some facility to help you
+You can use the createB2 function to manually call a b2 api but if you use blazer
+from some sort of a server app, then it would be convenient to have some facility to help you
 do automatic retries and token keys management. The createB2Session calls does that
 exactly.
 
