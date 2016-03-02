@@ -1,5 +1,5 @@
 {
-  "name": "blazer",
+  "name": "blazer-b2",
   "version": "0.0.2",
   "description": "Node API for BackBlaze B2",
   "main": "lib/b2.js",
