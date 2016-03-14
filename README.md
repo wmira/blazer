@@ -6,11 +6,12 @@ in progress and not all api is implemented yet.
 
 Status:
 
+0.0.3
+ - implemented list_file_names, list_file_versions, get_file_info, hide_file,
+   delete_file_version,
 0.0.2
-
  - added b2session - helper to do automatic retries
  - added store management to help in persisting/reusing tokens
-
 0.0.1
  - upload_file
  - create_bucket
