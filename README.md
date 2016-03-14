@@ -28,7 +28,7 @@ Status:
 # Usage
 ```javascript
 
-const { authorize_account, createB2 } = require('blazer');
+const { authorize_account, createB2 } = require('blazer-b2');
 
 /**
  * authorize_account is used to retrieve a b2 token which you can use
@@ -71,7 +71,7 @@ b2.create_bucket({bucketName, bucketType}).then( res => {
 
 ```javascript
 
-const { buckets } = require('blazer');
+const { buckets } = require('blazer-b2/buckets');
 const { create_bucket } = buckets;
 
 create_bucket(token)({bucketName, bucketType}).then( res => {
@@ -104,7 +104,7 @@ exactly.
 To create a b2Session object, call createB2Session passing in your accountId and applicationKey
 
 ```javascript
-    const { createB2Session } = require('blazer');
+    const { createB2Session } = require('blazer-b2');
 
     const b2Session = createB2Session( { accountId, applicationKey} );
 
