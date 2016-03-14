@@ -3,7 +3,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 const path = require('path');
 
-const { httpCall, enrichParams, hostnameFromApiUrl, createApiHeader } = require('./util');
+const { createHttpCall, httpCall, enrichParams, hostnameFromApiUrl, createApiHeader } = require('./util');
 
 /**
  * https://www.backblaze.com/b2/docs/b2_get_upload_url.html
@@ -89,4 +89,61 @@ const upload_file = ({ uploadToken, file, contentType, fileName  }) => {
     });
 };
 
-module.exports = { get_upload_url, upload_file };
+/**
+ * https://www.backblaze.com/b2/docs/b2_get_file_info.html
+ */
+const get_file_info = (token) => {
+
+    return function({fileId}) {
+        if ( !fileId ) {
+            throw new Error('fileId is required');
+        }
+
+        const body = { fileId };
+        return createHttpCall( token, body, '/b2_get_file_info' );
+
+    };
+
+};
+
+/**
+ * https://www.backblaze.com/b2/docs/b2_hide_file.html
+ */
+const hide_file = (token) => {
+
+    return function({bucketId, fileName}) {
+        if ( !bucketId ) {
+            throw new Error('bucketId is required');
+        }
+        if ( !fileName ) {
+            throw new Error('fileName is required');
+        }
+
+        const body = { bucketId, fileName };
+        return createHttpCall( token, body, '/b2_hide_file' );
+
+    };
+};
+
+/**
+ * https://www.backblaze.com/b2/docs/b2_delete_file_version.html
+ */
+const delete_file_version = (token) => {
+
+    return function({fileName, fileId}) {
+        if ( !fileName ) {
+            throw new Error('fileName is required');
+        }
+        if ( !fileId ) {
+            throw new Error('fileId is required');
+        }
+
+        const body = { fileName, fileId };
+        return createHttpCall( token, body, '/b2_delete_file_version' );
+
+    };
+
+};
+
+
+module.exports = { get_upload_url, upload_file, get_file_info, hide_file, delete_file_version };

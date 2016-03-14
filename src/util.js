@@ -11,6 +11,7 @@ const BASE_OPTION = freeze({
 });
 
 
+
 const createApiHeader = ( bodyString, token ) => {
     const headers = {
         'charset': 'utf-8',
@@ -63,6 +64,12 @@ const httpCall = (params, tosend)  => {
         req.end();
     });
 };
+const createHttpCall = ( token, body, endpoint ) => {
 
+    const jsonString = JSON.stringify(body);
+    const headers = createApiHeader( jsonString, token );
+    return httpCall(enrichParams(endpoint,
+        { method: 'POST', hostname: hostnameFromApiUrl(token.apiUrl), headers }  ), jsonString);
+};
 
-module.exports = {  httpCall, enrichParams, hostnameFromApiUrl, createApiHeader };
+module.exports = {  httpCall, enrichParams, hostnameFromApiUrl, createApiHeader, createHttpCall };

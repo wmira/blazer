@@ -1,6 +1,9 @@
 
-const { create_bucket, list_buckets, delete_bucket, update_bucket } = require('./buckets');
-const { get_upload_url, upload_file } = require('./upload');
+const { create_bucket, list_buckets,
+        delete_bucket, update_bucket,
+        list_file_names, list_file_versions } = require('./buckets');
+const { get_upload_url, upload_file, get_file_info, hide_file,
+        delete_file_version } = require('./file');
 const { authorize_account } = require('./authorize_account');
 const { createSessionHandler } = require('./sessionUtil');
 
@@ -18,7 +21,14 @@ const createB2 = (token) => {
         create_bucket: create_bucket(token),
         list_buckets: list_buckets(token),
         get_upload_url: get_upload_url(token),
-        upload_file: upload_file
+        upload_file,
+        hide_file: hide_file(token),
+        delete_file_version: delete_file_version(token),
+        get_file_info: get_file_info(token),
+        list_file_versions: list_file_versions(token),
+        delete_bucket: delete_bucket(token),
+        update_bucket: update_bucket(token),
+        list_file_names: list_file_names(token)
     };
     return api;
 };
@@ -36,18 +46,16 @@ const apis = {
     upload_file,
     delete_bucket,
     update_bucket,
+    list_file_names,
+    list_file_versions,
+    get_file_info,
+    hide_file,
+    delete_file_version,
     cancel_large_file: slackerFunc,
-    delete_file_version: slackerFunc,
     download_file_by_id: slackerFunc,
     download_file_by_name: slackerFunc,
     finish_large_file: slackerFunc,
-    get_file_info: slackerFunc,
     get_upload_part_url: slackerFunc,
-    get_upload_url: slackerFunc,
-    hide_file: slackerFunc,
-    list_buckets: slackerFunc,
-    list_file_names: slackerFunc,
-    list_file_versions: slackerFunc,
     list_parts: slackerFunc,
     list_unfinished_large_files: slackerFunc,
     start_large_file: slackerFunc,
