@@ -1,6 +1,6 @@
 {
   "name": "blazer-b2",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Node API for BackBlaze B2",
   "main": "lib/b2.js",
   "scripts": {
@@ -8,6 +8,10 @@
     "dist": "babel -d lib/ src/",
     "test-watch": "mocha --harmony --harmony_modules --harmony_rest_parameters --harmony_destructuring --recursive  -w",
     "test": "mocha --harmony --harmony_modules --harmony_rest_parameters --harmony_destructuring --recursive "
+  },
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/logistika/blazer"
   },
   "homepage": "https://github.com/logistika/blazer",
   "keywords": [
